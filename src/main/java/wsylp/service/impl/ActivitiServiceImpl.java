@@ -2,10 +2,7 @@ package wsylp.service.impl;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.zip.ZipInputStream;
 
 import org.activiti.engine.HistoryService;
@@ -160,9 +157,9 @@ public class ActivitiServiceImpl implements ActivitiService {
         List<Role> roleList = userService.getRolesByLoginName(loginName);
         for (Role role : roleList) {
             // 任务列表
-            List<Task> list = taskQuery.processDefinitionKey(processDefinitionKey).taskAssignee(role.getRoleCode())// 指定办理人
-                    // . taskCandidateUser(assignee)// 组任务的办理人查询
-                    .list();
+            List<Task> list = taskQuery.processDefinitionKey(processDefinitionKey).taskAssignee(role.getRoleCode())
+                    // . taskCandidateUser(assignee)
+                    .list();// 组任务的办理人查询
 
             for (Task task : list) {
                 LOGGER.info("任务处理人【{}】", task.getAssignee());
@@ -473,4 +470,34 @@ public class ActivitiServiceImpl implements ActivitiService {
         return true;
     }
 
+    @Override
+    public boolean suspendProcessInstanceById(String processInstanceId) {
+        runtimeService.suspendProcessInstanceById(processInstanceId);
+        return true;
+    }
+
+    @Override
+    public boolean deleteProcessInstance(String processInstanceId, String reason) {
+        runtimeService.deleteProcessInstance(processInstanceId, reason);
+        return true;
+    }
+
+    @Override
+    public boolean activateProcessInstanceById(String processInstanceId) {
+        runtimeService.activateProcessInstanceById(processInstanceId);
+        return true;
+    }
+
+    @Override
+    public boolean suspendProcessDefineKey(String processDefineKey, boolean cascade) {
+        repositoryService.suspendProcessDefinitionByKey(processDefineKey,cascade,new Date());
+        return true;
+    }
+
+    @Override
+    public boolean activateProcessDefinitionByKey(String processDefineKey,boolean cascade){
+        repositoryService.activateProcessDefinitionByKey(processDefineKey,cascade,new Date());
+        return true;
+
+    }
 }

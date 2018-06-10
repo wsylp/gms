@@ -7,23 +7,20 @@ import java.util.Map;
 import org.activiti.engine.task.Task;
 
 
-
 public interface ActivitiService {
 
     /**
      * 创建表以及数据库
-     * 
+     *
      * @return
      */
     boolean createtableByXml();
 
     /**
      * 发布流程
-     * 
-     * @param folderPath
-     *            文件夹地址
-     * @param map
-     *            参数
+     *
+     * @param folderPath 文件夹地址
+     * @param map        参数
      * @return
      */
 
@@ -31,42 +28,35 @@ public interface ActivitiService {
 
     /**
      * 发布流程格式为zip
-     * 
-     * @param folderPath
-     *            文件夹地址
-     * @param map
-     *            参数
+     *
+     * @param folderPath 文件夹地址
+     * @param map        参数
      * @return
      */
     boolean deployActivitiByZip(String folderPath, HashMap<String, String> map);
 
     /**
      * 开始流程并完成当前任务 不建议使用（完成使有风险）
-     * 
-     * @param processDefinitionKey
-     *            流程定义key
-     * @param map
-     *            存放变量，创建人，机构等信息
+     *
+     * @param processDefinitionKey 流程定义key
+     * @param map                  存放变量，创建人，机构等信息
      * @return
      */
     boolean startActivitiAndFinsh(String processDefinitionKey, HashMap<String, Object> map);
 
     /**
      * 开始流程并完成当前任务
-     * 
-     * @param processDefinitionKey
-     *            流程定义key
-     * @param map
-     *            存放变量，创建人，机构等信息
+     *
+     * @param processDefinitionKey 流程定义key
+     * @param map                  存放变量，创建人，机构等信息
      * @return
      */
     boolean startActiviti(String processDefinitionKey, HashMap<String, Object> map);
 
     /**
      * 完成任务
-     * 
-     * @param taskId
-     *            任务id
+     *
+     * @param taskId 任务id
      * @return
      */
     boolean finshTask(String taskId);
@@ -75,31 +65,26 @@ public interface ActivitiService {
 
     /**
      * 获取所有任务
-     * 
+     *
      * @return
      */
     boolean getTasks();
 
     /**
      * 根据登录号查询任务
-     * 
-     * @param processDefinitionKey
-     *            流程定义key
-     * @param loginName
-     *            登录号
+     *
+     * @param processDefinitionKey 流程定义key
+     * @param loginName            登录号
      * @return
      */
     boolean getTaskByLoginName(String processDefinitionKey, String loginName);
 
     /**
      * 查询任务
-     * 
-     * @param deploymentId
-     *            流程部署id
-     * @param processDefinitionKey
-     *            流程定义key
-     * @param loginName
-     *            登录号
+     *
+     * @param deploymentId         流程部署id
+     * @param processDefinitionKey 流程定义key
+     * @param loginName            登录号
      * @return
      */
     List<Task> getTaskByDeploymentId(String deploymentId, String processDefinitionKey, String executionId,
@@ -107,7 +92,7 @@ public interface ActivitiService {
 
     /**
      * 查询流程定义信息
-     * 
+     *
      * @param processDefinitionKey
      * @return
      */
@@ -118,7 +103,7 @@ public interface ActivitiService {
     /**
      * Deletes the given deployment and cascade deletion to process instances,
      * history process instances and jobs.
-     * 
+     *
      * @param deploymentId
      * @param cascade
      * @return
@@ -128,7 +113,7 @@ public interface ActivitiService {
 
     /**
      * 默认只删除部署表
-     * 
+     *
      * @param deploymentId
      * @return
      */
@@ -136,7 +121,7 @@ public interface ActivitiService {
 
     /**
      * 根据执行对象设置变量
-     * 
+     *
      * @param excutionId
      * @param map
      * @return
@@ -166,7 +151,7 @@ public interface ActivitiService {
 
     /**
      * 委派任务
-     * 
+     *
      * @param taskId
      * @param loginName
      * @return
@@ -175,7 +160,7 @@ public interface ActivitiService {
 
     /**
      * 根据指定人查询任务
-     * 
+     *
      * @param processDefinitionKey
      * @param assignee
      * @return
@@ -184,7 +169,7 @@ public interface ActivitiService {
 
     /**
      * 根据任务拥有者查询任务
-     * 
+     *
      * @param processDefinitionKey
      * @param owner
      * @return
@@ -193,7 +178,7 @@ public interface ActivitiService {
 
     /**
      * 委派人完成任务
-     * 
+     *
      * @param taskId
      * @param map
      * @return
@@ -202,9 +187,53 @@ public interface ActivitiService {
 
     /**
      * 将任务委派他人完成
+     *
      * @param taskId
      * @param assignee
      * @return
      */
     boolean trunTask(String taskId, String assignee);
+
+    /**
+     * 挂起流程实例
+     *
+     * @param processInstanceId
+     * @return
+     */
+    boolean suspendProcessInstanceById(String processInstanceId);
+
+    /**
+     * 删除流程实例
+     *
+     * @param processInstanceId
+     * @param reason
+     * @return
+     */
+    boolean deleteProcessInstance(String processInstanceId, String reason);
+
+    /**
+     * 激活流程实例（激活挂起的流程实例）
+     *
+     * @param processInstanceId
+     * @return
+     */
+    boolean activateProcessInstanceById(String processInstanceId);
+
+    /**
+     * 挂起流程定义
+     *
+     * @param processDefineKey
+     * @param cascade
+     * @return
+     */
+    boolean suspendProcessDefineKey(String processDefineKey, boolean cascade);
+
+    /**
+     * 激活流程定义
+     *
+     * @param processDefineKey
+     * @param cascade
+     * @return
+     */
+    boolean activateProcessDefinitionByKey(String processDefineKey, boolean cascade);
 }

@@ -96,7 +96,7 @@ public class ActivitiServiceTest {
 
     @Test
     public void getProcessInstanceStateByProcessInstanceId() {
-        String processInstanceId = "75001";
+        String processInstanceId = "70001";
         activitiService.getProcessInstanceStateByProcessInstanceId(processInstanceId);
     }
 
