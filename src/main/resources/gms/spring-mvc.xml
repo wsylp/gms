@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:c="http://www.springframework.org/schema/c"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+  xmlns:jee="http://www.springframework.org/schema/jee"
+  xmlns:lang="http://www.springframework.org/schema/lang"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+  xmlns:oxm="http://www.springframework.org/schema/oxm"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:task="http://www.springframework.org/schema/task"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+  <!--此文件负责整个mvc中的配置-->
+  <bean id="stringHttpMessageConverter"
+    class="org.springframework.http.converter.StringHttpMessageConverter">
+    <property name="supportedMediaTypes">
+      <list>
+        <value>text/plain;charset=UTF-8</value>
+        <value>application/json;charset=UTF-8</value>
+      </list>
+    </property>
+  </bean>
+
+  
+
+
+  <!--实现advice接口-->
+<!--  <aop:config proxy-target-class="true">
+    <aop:advisor advice-ref="logBefore" pointcut="execution(* wsylp..*.UserService.*(..))"  />
+    <aop:advisor advice-ref="logAfter" pointcut="execution(* wsylp..*.UserService.*(..))"  />
+    <aop:advisor advice-ref="logAround" pointcut="execution(* wsylp..*.UserService.*(..))"  />
+  </aop:config>
+  <bean id="logBefore" class="wsylp.log.advisor.LogAdvisorBefore"></bean>
+  <bean id="logAfter" class="wsylp.log.advisor.LogAdvisorAfter"></bean>
+  <bean id="logAround" class="wsylp.log.advisor.LogAdvisorAround"></bean>-->
+
+  <!--true代表使用cglib动态代理,false代表java动态代理,为匿名切点,无法被其他增强或者切面引用-->
+ <!-- <aop:config proxy-target-class="true">
+    <aop:aspect ref="logSchema" >
+      <aop:before method="logBefore" pointcut="target(wsylp.service.impl.UserServiceImpl)"></aop:before>
+    </aop:aspect>
+  </aop:config>-->
+
+ <!--<aop:config proxy-target-class="true">
+    <aop:aspect ref="logSchema" >
+      <aop:pointcut id="logPoint" expression="target(wsylp.service.impl.UserServiceImpl)"/>
+      <aop:before method="logBefore" pointcut-ref="logPoint"></aop:before>
+      <aop:after-returning method="logAfter" pointcut-ref="logPoint"></aop:after-returning>
+      <aop:around method="logAround" pointcut-ref="logPoint"></aop:around>
+    </aop:aspect>
+
+  </aop:config>
+  <bean id="logSchema" class="wsylp.log.schema.LogSchema"></bean>-->
+
+<!--低版本spring 基于advisor类-->
+<!--  <bean id="logBeforeAdvice" class="wsylp.log.advisorC.LogBeforeAdvice"></bean>
+  <bean id="logAfterAdvice" class="wsylp.log.advisorC.LogAfterAdvice"></bean>
+  <bean id="logAdvisorB" class="wsylp.log.advisorC.LogAdvisor"
+   p:advice-ref="logBeforeAdvice" />
+  <bean id="logAdvisorA" class="wsylp.log.advisorC.LogAdvisor"
+    p:advice-ref="logAfterAdvice" />
+    <bean id="parent" abstract="true" class="org.springframework.aop.framework.ProxyFactoryBean"
+    p:interceptorNames="logAdvisorB,logAdvisorA"
+    p:proxyTargetClass="true"
+  ></bean>
+  <bean id="userService1" parent="parent" p:target-ref="userService"></bean>-->
+
+
+  <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+  <!-- Jackson 是Spring 自带的功能 -->
+  <bean id="mappingJackson2HttpMessageConverter"
+    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    <property name="supportedMediaTypes">
+      <list>
+        <value>application/json;charset=UTF-8</value>
+        <value>application/xml;charset=UTF-8</value>
+        <value>text/html;charset=UTF-8</value>
+        <value>text/plain;charset=UTF-8</value>
+        <value>text/xml;charset=UTF-8</value>
+        <value>text/javascript;charset=UTF-8</value>
+      </list>
+    </property>
+  </bean>
+ <!--  <mvc:annotation-driven>
+    <mvc:message-converters>
+      <ref bean="stringHttpMessageConverter"/>
+      <ref bean="mappingJackson2HttpMessageConverter"/>
+    </mvc:message-converters>
+  </mvc:annotation-driven> -->
+  
+  <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8" />
+                <property name="supportedMediaTypes">
+                    <list>
+                        <bean class="org.springframework.http.MediaType">
+                            <constructor-arg index="0" value="text" />
+                            <constructor-arg index="1" value="plain" />
+                            <constructor-arg index="2" value="UTF-8" />
+                        </bean>
+                            <bean class="org.springframework.http.MediaType">
+                            <constructor-arg index="0" value="*" />
+                            <constructor-arg index="1" value="*" />
+                            <constructor-arg index="2" value="UTF-8" />
+                        </bean>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+  <!--启用spring的一些annotation -->
+  <context:annotation-config/>
+
+  <!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
+  <mvc:annotation-driven/>
+
+  <mvc:default-servlet-handler/>
+
+
+
+  <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
+  <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+  <bean id="defaultViewResolver"
+    class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    <property name="prefix" value="/jsp/"/><!--设置JSP文件的目录位置-->
+    <property name="suffix" value=".jsp"/>
+    <property name="exposeContextBeansAsAttributes" value="true"/>
+  </bean>
+
+  <!-- 自动扫描装配 -->
+  <context:component-scan base-package="wsylp.*"/>
+
+<!-- 注解aspect-->
+   <aop:aspectj-autoproxy/>
+  <bean id="myLog" class="wsylp.log.MyLog"></bean>
+
+</beans>

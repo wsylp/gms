@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="counterSign" name="counterSign" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="createApplier" name="创建申请" activiti:assignee="#{createLoginName}"></userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="createApplier"></sequenceFlow>
+    <userTask id="counterSignApplier" name="会签任务" activiti:assignee="#{assignee}">
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="assigneeList" activiti:elementVariable="assignee">
+        <completionCondition>${nrOfCompletedInstances&gt;=2}</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="flow2" sourceRef="createApplier" targetRef="counterSignApplier"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <userTask id="zjlsp" name="总经理审批" activiti:assignee="0001"></userTask>
+    <sequenceFlow id="flow3" sourceRef="counterSignApplier" targetRef="zjlsp"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="zjlsp" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_counterSign">
+    <bpmndi:BPMNPlane bpmnElement="counterSign" id="BPMNPlane_counterSign">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="150.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="createApplier" id="BPMNShape_createApplier">
+        <omgdc:Bounds height="55.0" width="105.0" x="230.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="counterSignApplier" id="BPMNShape_counterSignApplier">
+        <omgdc:Bounds height="55.0" width="105.0" x="380.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="680.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="zjlsp" id="BPMNShape_zjlsp">
+        <omgdc:Bounds height="55.0" width="105.0" x="530.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="185.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="230.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="335.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="380.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="485.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="530.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="635.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="680.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

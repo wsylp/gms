@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="rollback" name="回退流程" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="createApply" name="创建申请" activiti:assignee="#{createLoginName}"></userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="createApply"></sequenceFlow>
+    <userTask id="fzjlsp" name="副总经理[审批]" activiti:assignee="fzjl"></userTask>
+    <sequenceFlow id="flow2" sourceRef="createApply" targetRef="fzjlsp"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="agreeFlow" name="同意" sourceRef="fzjlsp" targetRef="endevent1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${advice =='agree'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="rejectFlow" name="驳回" sourceRef="fzjlsp" targetRef="createApply">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${advice =='reject'}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_rollback">
+    <bpmndi:BPMNPlane bpmnElement="rollback" id="BPMNPlane_rollback">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="120.0" y="60.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="createApply" id="BPMNShape_createApply">
+        <omgdc:Bounds height="55.0" width="105.0" x="200.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="fzjlsp" id="BPMNShape_fzjlsp">
+        <omgdc:Bounds height="55.0" width="105.0" x="420.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="700.0" y="60.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="155.0" y="77.0"></omgdi:waypoint>
+        <omgdi:waypoint x="200.0" y="77.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="305.0" y="77.0"></omgdi:waypoint>
+        <omgdi:waypoint x="420.0" y="77.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="agreeFlow" id="BPMNEdge_agreeFlow">
+        <omgdi:waypoint x="525.0" y="77.0"></omgdi:waypoint>
+        <omgdi:waypoint x="700.0" y="77.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="559.0" y="50.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="rejectFlow" id="BPMNEdge_rejectFlow">
+        <omgdi:waypoint x="472.0" y="105.0"></omgdi:waypoint>
+        <omgdi:waypoint x="328.0" y="262.0"></omgdi:waypoint>
+        <omgdi:waypoint x="252.0" y="105.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="412.0" y="180.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

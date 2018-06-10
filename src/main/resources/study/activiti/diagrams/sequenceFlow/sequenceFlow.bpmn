@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="sequenceFlow" name="连线流程" isExecutable="true">
+    <startEvent id="start" name="开始"></startEvent>
+    <userTask id="fjlsp" name="副总经理[审批]" activiti:assignee="fzjl"></userTask>
+    <sequenceFlow id="flow1" sourceRef="start" targetRef="fjlsp"></sequenceFlow>
+    <userTask id="zjlsp" name="总经理[审批]" activiti:assignee="zjl"></userTask>
+    <sequenceFlow id="sequenceFlowImplement" name="重要情况" sourceRef="fjlsp" targetRef="zjlsp">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${message =='重要'}]]></conditionExpression>
+    </sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow5" sourceRef="zjlsp" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="sequenceFlowUnImplement" name="非重要情况" sourceRef="fjlsp" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_sequenceFlow">
+    <bpmndi:BPMNPlane bpmnElement="sequenceFlow" id="BPMNPlane_sequenceFlow">
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="35.0" width="35.0" x="60.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="fjlsp" id="BPMNShape_fjlsp">
+        <omgdc:Bounds height="55.0" width="105.0" x="140.0" y="40.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="zjlsp" id="BPMNShape_zjlsp">
+        <omgdc:Bounds height="55.0" width="105.0" x="391.0" y="30.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="570.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="95.0" y="67.0"></omgdi:waypoint>
+        <omgdi:waypoint x="140.0" y="67.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlowImplement" id="BPMNEdge_sequenceFlowImplement">
+        <omgdi:waypoint x="245.0" y="67.0"></omgdi:waypoint>
+        <omgdi:waypoint x="391.0" y="57.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="48.0" x="255.0" y="43.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="443.0" y="85.0"></omgdi:waypoint>
+        <omgdi:waypoint x="587.0" y="160.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlowUnImplement" id="BPMNEdge_sequenceFlowUnImplement">
+        <omgdi:waypoint x="192.0" y="95.0"></omgdi:waypoint>
+        <omgdi:waypoint x="587.0" y="160.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="60.0" x="217.0" y="113.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

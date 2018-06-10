@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wsylp.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="wsylp.po.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="level" jdbcType="BIGINT" property="level" />
+    <result column="family_adress" jdbcType="VARCHAR" property="familyAdress" />
+    <result column="work_adress" jdbcType="VARCHAR" property="workAdress" />
+    <result column="work_type" jdbcType="VARCHAR" property="workType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, real_name, login_name, password, org_code, phone, id_card, level, family_adress, 
+    work_adress, work_type, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="wsylp.po.User">
+    insert into t_user (id, real_name, login_name, 
+      password, org_code, phone, 
+      id_card, level, family_adress, 
+      work_adress, work_type, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{level,jdbcType=BIGINT}, #{familyAdress,jdbcType=VARCHAR}, 
+      #{workAdress,jdbcType=VARCHAR}, #{workType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="wsylp.po.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="familyAdress != null">
+        family_adress,
+      </if>
+      <if test="workAdress != null">
+        work_adress,
+      </if>
+      <if test="workType != null">
+        work_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=BIGINT},
+      </if>
+      <if test="familyAdress != null">
+        #{familyAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="workAdress != null">
+        #{workAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null">
+        #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="wsylp.po.User">
+    update t_user
+    <set>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=BIGINT},
+      </if>
+      <if test="familyAdress != null">
+        family_adress = #{familyAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="workAdress != null">
+        work_adress = #{workAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null">
+        work_type = #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="wsylp.po.User">
+    update t_user
+    set real_name = #{realName,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      level = #{level,jdbcType=BIGINT},
+      family_adress = #{familyAdress,jdbcType=VARCHAR},
+      work_adress = #{workAdress,jdbcType=VARCHAR},
+      work_type = #{workType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getUserLogin" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_user
+    where login_name = #{loginName,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getUserList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_user
+  </select>
+
+  <select id="getUserListByFP" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_user
+    where 1 = 1
+    <if test="filter!=null">
+      <if test="filter.loginName !=null and filter.loginName !='' ">
+       and login_name like CONCAT('%',#{filter.loginName},'%')
+      </if>
+      <if test="filter.realName!=null and filter.realName!='' ">
+        and real_name like CONCAT('%',#{filter.realName},'%')
+      </if>
+    </if>
+    LIMIT ${pagination.start}, ${pagination.limit}
+  </select>
+
+
+  <select id="countUserListByFP" resultType="java.lang.Long">
+    select count(*)
+    from t_user
+    where 1 =1
+    <if test="filter!=null">
+      <if test="filter.loginName !=null and filter.loginName !='' ">
+        and login_name like CONCAT('%',#{filter.loginName},'%')
+      </if>
+      <if test="filter.realName!=null and filter.realName!='' ">
+        and real_name like CONCAT('%',#{filter.realName},'%')
+      </if>
+    </if>
+  </select>
+  
+ 
+</mapper>

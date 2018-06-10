@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource_act" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${driverClass}" />
+        <property name="url" value="${jdbcUrlActi}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+    </bean>
+
+    <bean id="transactionManager_act" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource_act" />
+    </bean>
+
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <property name="dataSource" ref="dataSource_act" />
+        <property name="transactionManager" ref="transactionManager_act" />
+
+        <property name="databaseSchemaUpdate" value="true" />
+
+        <property name="jobExecutorActivate" value="false" />
+        <!-- Activit默认提供了4中历史级别： none: 不保存任何历史记录，可以提高系统性能； -->
+        <!-- activity：保存所有的流程实例、任务、活动信息； audit：也是Activiti的默认级别，保存所有的流程实例、任务、活动、表单属性； -->
+        <!-- full： 最完整的历史记录，除了包含audit级别的信息之外还能保存详细，例如：流程变量 -->
+        <property name="history" value="full" />
+        <property name="databaseType" value="mysql" />
+
+        <property name="dbIdentityUsed" value="false" />
+        <!-- 不检测历史表是否存在,应对Activiti database problem: Tables missing for component(s) history, identity -->
+        <property name="dbHistoryUsed" value="true" />
+        <!-- 发布时是否包括流程图片png -->
+        <property name="createDiagramOnDeploy" value="false" />
+        <!-- 避免发布的图片和xml遇到中文时乱码 -->
+        <property name="activityFontName" value="宋体" />
+        <property name="labelFontName" value="宋体" />
+        <!-- 解析xml流程文件所使用的字符集，默认为utf8，依据数据库来 -->
+        <property name="xmlEncoding" value="utf8" />
+        <!-- <property name="deploymentResources"> 自动部署 <list> <value>classpath*:/study/activiti/diagrams/autoDeploy/*</value> 
+            </list> </property> -->
+
+
+<property name="processEngineLifecycleListener" ref="myProcessEngineLifecycleListener" />
+    </bean>
+
+
+
+    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration" />
+    </bean>
+
+    <bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />
+    <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService" />
+    <bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />
+    <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
+    <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
+
+    <!-- <bean id="activitiDeployer" class="wsylp.plugins.WorkflowDeployer"> <property name="deploymentResources" value="classpath*:diagrams/autoDeploy" 
+        /> </bean> -->
+        
+        
+    
+</beans>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="buyBill" name="采购流程" isExecutable="true">
+    <startEvent id="startBuyBill" name="Start"></startEvent>
+    <userTask id="applier" name="采购申请" activiti:assignee="#{applier}"></userTask>
+    <sequenceFlow id="flow1" sourceRef="startBuyBill" targetRef="applier"></sequenceFlow>
+    <userTask id="主管" name="审批[副总]" activiti:assignee="fzjl"></userTask>
+    <sequenceFlow id="flow2" sourceRef="applier" targetRef="主管"></sequenceFlow>
+    <userTask id="总经理" name="审批[总经理]" activiti:assignee="zjl"></userTask>
+    <sequenceFlow id="flow3" sourceRef="主管" targetRef="总经理"></sequenceFlow>
+    <endEvent id="endBuyBill" name="End"></endEvent>
+    <sequenceFlow id="flow4" sourceRef="总经理" targetRef="endBuyBill"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_buyBill">
+    <bpmndi:BPMNPlane bpmnElement="buyBill" id="BPMNPlane_buyBill">
+      <bpmndi:BPMNShape bpmnElement="startBuyBill" id="BPMNShape_startBuyBill">
+        <omgdc:Bounds height="35.0" width="35.0" x="50.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="applier" id="BPMNShape_applier">
+        <omgdc:Bounds height="55.0" width="105.0" x="130.0" y="40.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="主管" id="BPMNShape_主管">
+        <omgdc:Bounds height="55.0" width="105.0" x="280.0" y="40.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="总经理" id="BPMNShape_总经理">
+        <omgdc:Bounds height="55.0" width="105.0" x="430.0" y="40.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endBuyBill" id="BPMNShape_endBuyBill">
+        <omgdc:Bounds height="35.0" width="35.0" x="580.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="85.0" y="67.0"></omgdi:waypoint>
+        <omgdi:waypoint x="130.0" y="67.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="235.0" y="67.0"></omgdi:waypoint>
+        <omgdi:waypoint x="280.0" y="67.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="385.0" y="67.0"></omgdi:waypoint>
+        <omgdi:waypoint x="430.0" y="67.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="535.0" y="67.0"></omgdi:waypoint>
+        <omgdi:waypoint x="580.0" y="67.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

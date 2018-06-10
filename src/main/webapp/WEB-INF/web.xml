@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>gms</display-name>
+  
+ <context-param>
+    <param-name>contextConfigLocation</param-name>
+   <!-- ,classpath*:spring-cxf-rest.xml-->
+    <param-value>classpath:gms/spring-m*.xml,classpath*:gms/spring-a*.xml</param-value>
+  </context-param>
+  <!-- spring监听器 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+
+
+
+  <!-- 防止spring内存溢出监听器，比如quartz -->
+  <listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener>
+
+  <!--
+  <context-param>
+2         <param-name>log4jContextName</param-name>
+3         <param-value>star</param-value>
+4     </context-param>
+5
+6     <context-param>
+7         <param-name>log4jConfiguration</param-name>
+8         <param-value>/WEB-INF/conf/log4j2.xml</param-value>
+9     </context-param>
+  -->
+
+  <!-- spring mvc servlet-->
+
+
+  <servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:gms/spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+    <async-supported>true</async-supported>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <!-- 此处也可以配置成 *.do 形式 -->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>/index.html</welcome-file>
+  </welcome-file-list>
+
+  <!-- session配置 -->
+  <session-config>
+    <session-timeout>15</session-timeout>
+  </session-config>
+
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+  </jsp-config>
+
+
+</web-app>
