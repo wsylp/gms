@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import wsylp.service.ActivitiService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:gms/spring-m*.xml", "classpath*:gms/spring-a*.xml" })
-// @ContextConfiguration(locations = { "classpath*:gms/spring-*.xml" })
+//@ContextConfiguration(locations = { "classpath*:gms/spring-m*.xml", "classpath*:gms/spring-a*.xml" })
+ @ContextConfiguration(locations = { "classpath*:gms/spring-*.xml" })
 public class ActivitiServiceTest {
 
     @Autowired

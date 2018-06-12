@@ -6,6 +6,11 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+
+
+
+
+
     <!-- 配置数据源 -->
     <bean id="dataSource_act" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${driverClass}" />
@@ -31,7 +36,7 @@
         <property name="history" value="full" />
         <property name="databaseType" value="mysql" />
 
-        <property name="dbIdentityUsed" value="false" />
+        <property name="dbIdentityUsed" value="true" />
         <!-- 不检测历史表是否存在,应对Activiti database problem: Tables missing for component(s) history, identity -->
         <property name="dbHistoryUsed" value="true" />
         <!-- 发布时是否包括流程图片png -->
@@ -45,7 +50,7 @@
             </list> </property> -->
 
 
-<property name="processEngineLifecycleListener" ref="myProcessEngineLifecycleListener" />
+        <!--<property name="processEngineLifecycleListener" ref="myProcessEngineLifecycleListener" />-->
     </bean>
 
 
