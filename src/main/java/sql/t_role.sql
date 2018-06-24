@@ -8,3 +8,4 @@ create table t_role (
 insert into t_role(name,role_code,remark) values('采购部—总经理','dqzjl','每个地区都有一个总经理');
 insert into t_role(name,role_code,remark) values('采购部—副总经理','dqfzjl','每个地区都有一个副总经理');
 insert into t_role(name,role_code,remark) values('采购部—采购员','cgy','用于采购物品');
+insert into t_role(name,role_code,remark) values('购员','gy','用于采购物品');

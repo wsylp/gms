@@ -10,14 +10,21 @@
 
 
 
+    <!--使用阿里巴巴的druid连接池 -->
+    <bean id="dataSource_act" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 
-    <!-- 配置数据源 -->
-    <bean id="dataSource_act" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${driverClass}" />
-        <property name="url" value="${jdbcUrlActi}" />
-        <property name="username" value="${username}" />
-        <property name="password" value="${password}" />
+        <!--配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过名字来区分开来。如果没有配置，将会生成一个名字，格式是："DataSource-" + System.identityHashCode(this)-->
+
+
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${jdbcActivi.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
     </bean>
+
+
+
 
     <bean id="transactionManager_act" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource_act" />

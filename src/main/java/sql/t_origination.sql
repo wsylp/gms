@@ -1,5 +1,5 @@
 CREATE TABLE t_organization (
-    code VARCHAR(50) NULL DEFAULT NULL,
+    code VARCHAR(50) not NULL    ,
     name VARCHAR(50) NULL DEFAULT NULL,
     remark varchar(100),
     PRIMARY KEY (code)
