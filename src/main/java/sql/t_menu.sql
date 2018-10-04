@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `t_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 insert into t_menu  values ('menu_user_001','用户管理','',-1,1,1,'','closed');
 insert into t_menu  values ('menu_user_002','用户管理','','menu_user_001',1,1,'','');
+
 insert into t_menu  values ('menu_user_003','用户查询','','menu_user_001',1,1,'','');
 
 
