@@ -26,7 +26,7 @@ public class Pagination {
     }
 
     public int getStart() {
-        return start;
+        return (page-1)*limit;
     }
 
     public void setStart(int start) {

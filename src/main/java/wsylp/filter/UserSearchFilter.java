@@ -14,6 +14,10 @@ public class UserSearchFilter {
     private int level;
     private  Date startTime;
     private Date endTime;
+    private String orgCode;
+
+
+
 
 
     public String getLoginName() {
@@ -70,5 +74,13 @@ public class UserSearchFilter {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getOrgCode() {
+        return orgCode;
+    }
+
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
     }
 }

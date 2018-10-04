@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import wsylp.dao.MenuMapper;
 import wsylp.dao.RoleMapper;
 import wsylp.dao.UserMapper;
+import wsylp.filter.Pagination;
+import wsylp.filter.UserSearchFilter;
 import wsylp.po.Menu;
 import wsylp.po.Role;
+import wsylp.po.User;
 import wsylp.service.UserService;
 import wsylp.util.TreeNoteUtil;
 import wsylp.vo.MenuTree;
@@ -47,5 +50,18 @@ public class UserServiceImpl implements UserService {
        List<Role> roleList = roleDao.getRolesByLoginName(loginName);
        return roleList;
     }
+
+    @Override
+    public List<User> getUserList(UserSearchFilter filter, Pagination pagination) {
+        List<User> userList = userDao.getUserList(filter,pagination);
+        return userList;
+    }
+
+    @Override
+    public int countUserList(UserSearchFilter filter) {
+        int count = userDao.countUserList(filter);
+        return count;
+    }
+
 
 }

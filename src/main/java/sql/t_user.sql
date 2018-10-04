@@ -31,4 +31,31 @@ VALUES (  '采购员小张', '0003', '123456', '0706678CG', '1', '2', 1, '1', '1
 INSERT INTO t_user (  real_name, login_name, password, org_code, phone, id_card, level, family_adress, work_adress, work_type, create_time, update_time)
 VALUES (  '柜员', '0004', '123456', '0706678CG', '1', '2', 1, '1', '1', '1', '2018-05-13 00:18:07', '2018-05-13 00:18:07');
 
+
+
+INSERT INTO t_user (  real_name, login_name, password, org_code, phone, id_card, level, family_adress, work_adress, work_type, create_time, update_time)
+VALUES (  '张三', '0005', '123456', '0706678CG', '1', '2', 1, '1', '1', '1', '2018-05-13 00:18:07', '2018-05-13 00:18:07');
+
+INSERT INTO t_user (  real_name, login_name, password, org_code, phone, id_card, level, family_adress, work_adress, work_type, create_time, update_time)
+VALUES (  '李四', '0006', '123456', '0706678CG', '1', '2', 1, '1', '1', '1', '2018-05-13 00:18:07', '2018-05-13 00:18:07');
+
+INSERT INTO t_user (  real_name, login_name, password, org_code, phone, id_card, level, family_adress, work_adress, work_type, create_time, update_time)
+VALUES (  '王二', '0007', '123456', '0706678CG', '1', '2', 1, '1', '1', '1', '2018-05-13 00:18:07', '2018-05-13 00:18:07');
+
+INSERT INTO t_user (  real_name, login_name, password, org_code, phone, id_card, level, family_adress, work_adress, work_type, create_time, update_time)
+VALUES (  '麻子', '0008', '123456', '0706678CG', '1', '2', 1, '1', '1', '1', '2018-05-13 00:18:07', '2018-05-13 00:18:07');
+
+
+
+INSERT INTO t_user (  real_name, login_name, password, org_code, phone, id_card, level, family_adress, work_adress, work_type, create_time, update_time)
+VALUES (  '张三1', '0009', '123456', '0706678CG', '1', '2', 1, '1', '1', '1', '2018-05-13 00:18:07', '2018-05-13 00:18:07');
+
+INSERT INTO t_user (  real_name, login_name, password, org_code, phone, id_card, level, family_adress, work_adress, work_type, create_time, update_time)
+VALUES (  '李四1', '0010', '123456', '0706678CG', '1', '2', 1, '1', '1', '1', '2018-05-13 00:18:07', '2018-05-13 00:18:07');
+
+INSERT INTO t_user (  real_name, login_name, password, org_code, phone, id_card, level, family_adress, work_adress, work_type, create_time, update_time)
+VALUES (  '王二1', '0011', '123456', '0706678CG', '1', '2', 1, '1', '1', '1', '2018-05-13 00:18:07', '2018-05-13 00:18:07');
+
+INSERT INTO t_user (  real_name, login_name, password, org_code, phone, id_card, level, family_adress, work_adress, work_type, create_time, update_time)
+VALUES (  '麻子1', '0012', '123456', '0706678CG', '1', '2', 1, '1', '1', '1', '2018-05-13 00:18:07', '2018-05-13 00:18:07');
 select * from t_user;

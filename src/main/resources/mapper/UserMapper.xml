@@ -197,7 +197,40 @@
     select
     <include refid="Base_Column_List"/>
     from t_user
+    where 1 = 1
+    <if test="filter!=null">
+      <if test="filter.loginName !=null and filter.loginName !='' ">
+        and login_name like CONCAT('%',#{filter.loginName},'%')
+      </if>
+      <if test="filter.realName!=null and filter.realName!='' ">
+        and real_name like CONCAT('%',#{filter.realName},'%')
+      </if>
+        <if test="filter.orgCode!=null and filter.orgCode!='' ">
+            and org_code like CONCAT('%',#{filter.orgCode},'%')
+        </if>
+    </if>
+    LIMIT ${pagination.start}, ${pagination.limit}
   </select>
+
+
+  <select id="countUserList" resultType="java.lang.Integer">
+    select count(*)
+    from t_user
+    where 1 = 1
+    <if test="filter!=null">
+      <if test="filter.loginName !=null and filter.loginName !='' ">
+        and login_name like CONCAT('%',#{filter.loginName},'%')
+      </if>
+      <if test="filter.realName!=null and filter.realName!='' ">
+        and real_name like CONCAT('%',#{filter.realName},'%')
+      </if>
+        <if test="filter.orgCode!=null and filter.orgCode!='' ">
+            and org_code like CONCAT('%',#{filter.orgCode},'%')
+        </if>
+    </if>
+
+  </select>
+
 
   <select id="getUserListByFP" resultMap="BaseResultMap">
     select
